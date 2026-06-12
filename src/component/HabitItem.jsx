@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Button from './Button'
 import { eachDayOfInterval, isFuture, isSameDay, startOfWeek, endOfWeek, format, subDays } from 'date-fns'
+import HabitContext from '../context/HabitContext'
 
-const HabitItem = ({ habit, deleteHabit, toggleHabit }) => {
+const HabitItem = ({ habit }) => {
+  const { deleteHabit, toggleHabit } = useContext(HabitContext)
+
   const visibleDates = eachDayOfInterval({
     start: startOfWeek(new Date(), { weekStartsOn: 1 }),
     end: endOfWeek(new Date(), { weekStartsOn: 1 })
   })
+
   const getStreak = () => {
     let streak = 0
     let day = new Date()
